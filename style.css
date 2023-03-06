@@ -27,3 +27,12 @@
     background-color: #45b7feab;
     border-radius: 5px;
 }
+
+.user {
+    position: absolute;
+    width: 160px;
+    height: 30px;
+    background-color: #6745feab;
+    border-radius: 5px;
+}
+

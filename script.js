@@ -2,6 +2,14 @@ const playground = document.querySelector('.playground');
 const blockWidth = 150;
 const blockHeight = 30;
 
+const userStart = [520, 40];
+let currentPosition = userStart;
+
+const playerSpeed = 10;
+
+const ballStart = [582, 120];
+let ballCurrentPosition = ballStart;
+
 //Create block
 class Block {
     constructor(xAxis, yAxis) {
@@ -10,24 +18,24 @@ class Block {
         this.bottomLeft = [xAxis, yAxis + blockHeight];
         this.bottomRight = [xAxis + blockWidth, yAxis + blockHeight];
     }
-}
+};
 
 //All blocks
 const blocks = [
-    new Block(45,40),
-    new Block(205,40),
-    new Block(365,40),
-    new Block(525,40),
-    new Block(685,40),
-    new Block(845,40),
-    new Block(1005,40),
-    new Block(45, 80),
-    new Block(205,80),
-    new Block(365,80),
-    new Block(525,80),
-    new Block(685,80),
-    new Block(845,80),
-    new Block(1005,80),
+    new Block(40,40),
+    new Block(200,40),
+    new Block(360,40),
+    new Block(520,40),
+    new Block(680,40),
+    new Block(840,40),
+    new Block(1000,40),
+    new Block(40, 80),
+    new Block(200,80),
+    new Block(360,80),
+    new Block(520,80),
+    new Block(680,80),
+    new Block(840,80),
+    new Block(1000,80),
 ];
 
 //Draw block
@@ -39,6 +47,39 @@ function addBlocks() {
         block.style.top = blocks[i].topLeft[1] + 'px';
         playground.appendChild(block);
     }
-}
+};
 
 addBlocks();
+
+//Add user
+const user = document.createElement('div');
+user.classList.add('user');
+drawUser();
+playground.appendChild(user);
+
+//Draw user
+function drawUser() {
+    user.style.left = currentPosition[0] + 'px';
+    user.style.bottom = currentPosition[1] + 'px';
+};
+
+//Move user
+function moveUser(event) {
+    switch(event.key) {
+        case 'ArrowLeft':
+            if(currentPosition[0] > 0) {
+                currentPosition[0] -= playerSpeed;
+                drawUser();
+            }
+            break;
+        case 'ArrowRight':
+            if(currentPosition[0] < 1030) {
+                currentPosition[0] += playerSpeed;
+                drawUser();
+            }
+            break;
+    }
+};
+
+document.addEventListener('keydown', moveUser);
+
